@@ -58,13 +58,13 @@
 	var splatSystemRequire = __webpack_require__(42);
 
 	var localSystemPath = "./systems";
-	var localSystemRequire = __webpack_require__(76);
+	var localSystemRequire = __webpack_require__(77);
 
 	var localScriptPath = "./scripts";
-	var localScriptRequire = __webpack_require__(82);
+	var localScriptRequire = __webpack_require__(83);
 
 	var localDataPath = "./data";
-	var localDataRequire = __webpack_require__(88);
+	var localDataRequire = __webpack_require__(89);
 
 	function customRequire(path) {
 		if (path.indexOf(splatSystemPath) === 0) {
@@ -86,9 +86,9 @@
 		console.error("Unable to load module: \"", path, "\"");
 		return undefined;
 	}
-	__webpack_require__(97);
 	__webpack_require__(98);
-	__webpack_require__(100);
+	__webpack_require__(99);
+	__webpack_require__(101);
 
 	var game = new Splat.Game(canvas, customRequire);
 
@@ -1017,6 +1017,12 @@
 					return true;
 				}
 			}
+			if (device === "mouse") {
+				var button = physicalInput.button;
+				if (this.mouse.isPressed(button)) {
+					return true;
+				}
+			}
 			if (device === "touch") {
 				for (var j = 0; j < this.mouse.touches.length; j++) {
 					var t = this.mouse.touches[j];
@@ -1513,7 +1519,11 @@
 			return;
 		}
 		if (typeof this.onEnter === "function") {
+			this._stop = function() {};
 			this.onEnter();
+			if (this._stop === undefined) {
+				return;
+			}
 		}
 		this._stop = gameLoop(this.entities, this.simulation, this.simulationStepTime, this.renderer, context);
 	};
@@ -3255,9 +3265,10 @@
 		"./follow-parent.js": 70,
 		"./match-aspect-ratio.js": 71,
 		"./match-canvas-size.js": 72,
-		"./match-parent.js": 73,
-		"./viewport-move-to-camera.js": 74,
-		"./viewport-reset.js": 75
+		"./match-center.js": 73,
+		"./match-parent.js": 74,
+		"./viewport-move-to-camera.js": 75,
+		"./viewport-reset.js": 76
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -7753,6 +7764,34 @@
 	"use strict";
 
 	module.exports = function(ecs, game) {
+		game.entities.registerSearch("matchCenterSearch", ["matchCenter", "size", "position"]);
+		ecs.addEach(function matchCenter(entity, elapsed) { // eslint-disable-line no-unused-vars
+			var position = game.entities.get(entity, "position");
+			var size = game.entities.get(entity, "size");
+
+			var match = game.entities.get(entity, "matchCenter").id;
+			var matchPosition = game.entities.get(match, "position");
+			if (matchPosition === undefined) {
+				return;
+			}
+			var matchSize = game.entities.get(match, "size");
+			if (matchSize === undefined) {
+				return;
+			}
+
+			position.x = matchPosition.x + (matchSize.width /2) - (size.width / 2);
+			position.y = matchPosition.y + (matchSize.height /2) - (size.height / 2);
+		}, "matchCenterSearch");
+	};
+
+
+/***/ },
+/* 74 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = function(ecs, game) {
 		game.entities.registerSearch("matchParent", ["position", "match"]);
 		ecs.addEach(function matchParent(entity, elapsed) { // eslint-disable-line no-unused-vars
 			var match = game.entities.get(entity, "match");
@@ -7771,7 +7810,7 @@
 
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7790,7 +7829,7 @@
 
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7803,15 +7842,15 @@
 
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./renderer/render_score.js": 77,
-		"./renderer/sample-renderer-system.js": 78,
-		"./simulation/sample-simulation-system.js": 79,
-		"./simulation/simulate_gravity.js": 80,
-		"./simulation/switch_direction.js": 81
+		"./renderer/render_score.js": 78,
+		"./renderer/sample-renderer-system.js": 79,
+		"./simulation/sample-simulation-system.js": 80,
+		"./simulation/simulate_gravity.js": 81,
+		"./simulation/switch_direction.js": 82
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -7824,11 +7863,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 76;
+	webpackContext.id = 77;
 
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7847,7 +7886,7 @@
 
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7864,7 +7903,7 @@
 
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7899,7 +7938,7 @@
 
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7914,7 +7953,7 @@
 
 
 /***/ },
-/* 81 */
+/* 82 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7967,15 +8006,15 @@
 
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./game_over_enter.js": 83,
-		"./game_over_exit.js": 84,
-		"./main-enter.js": 85,
-		"./main-exit.js": 86,
-		"./spawn_baddie.js": 87
+		"./game_over_enter.js": 84,
+		"./game_over_exit.js": 85,
+		"./main-enter.js": 86,
+		"./main-exit.js": 87,
+		"./spawn_baddie.js": 88
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -7988,17 +8027,7 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 82;
-
-
-/***/ },
-/* 83 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	module.exports = function(game) { // eslint-disable-line no-unused-vars
-	};
+	webpackContext.id = 83;
 
 
 /***/ },
@@ -8018,6 +8047,16 @@
 	"use strict";
 
 	module.exports = function(game) { // eslint-disable-line no-unused-vars
+	};
+
+
+/***/ },
+/* 86 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = function(game) { // eslint-disable-line no-unused-vars
 
 		// Place Player
 		var player = 1;
@@ -8030,7 +8069,7 @@
 		game.entities.set(player, "position", start_pos);
 		var start_velocity = {
 			"x": 0,
-			"y": -0.5
+			"y": -0.4
 		}
 		game.entities.set(player, "velocity", start_velocity);
 
@@ -8050,7 +8089,7 @@
 
 
 /***/ },
-/* 86 */
+/* 87 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -8060,7 +8099,7 @@
 
 
 /***/ },
-/* 87 */
+/* 88 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -8109,18 +8148,18 @@
 
 
 /***/ },
-/* 88 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./animations.json": 89,
-		"./entities.json": 90,
-		"./images.json": 91,
-		"./inputs.json": 92,
-		"./prefabs.json": 93,
-		"./scenes.json": 94,
-		"./sounds.json": 95,
-		"./systems.json": 96
+		"./animations.json": 90,
+		"./entities.json": 91,
+		"./images.json": 92,
+		"./inputs.json": 93,
+		"./prefabs.json": 94,
+		"./scenes.json": 95,
+		"./sounds.json": 96,
+		"./systems.json": 97
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -8133,17 +8172,17 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 88;
+	webpackContext.id = 89;
 
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports) {
 
 	module.exports = {};
 
 /***/ },
-/* 90 */
+/* 91 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -8211,13 +8250,13 @@
 	};
 
 /***/ },
-/* 91 */
+/* 92 */
 /***/ function(module, exports) {
 
 	module.exports = {};
 
 /***/ },
-/* 92 */
+/* 93 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -8233,7 +8272,7 @@
 	};
 
 /***/ },
-/* 93 */
+/* 94 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -8283,7 +8322,7 @@
 	};
 
 /***/ },
-/* 94 */
+/* 95 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -8299,13 +8338,13 @@
 	};
 
 /***/ },
-/* 95 */
+/* 96 */
 /***/ function(module, exports) {
 
 	module.exports = {};
 
 /***/ },
-/* 96 */
+/* 97 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -8409,17 +8448,17 @@
 	};
 
 /***/ },
-/* 97 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "index.html";
 
 /***/ },
-/* 98 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./logo.png": 99
+		"./logo.png": 100
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -8432,17 +8471,17 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 98;
+	webpackContext.id = 99;
 
 
 /***/ },
-/* 99 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "images/logo.png";
 
 /***/ },
-/* 100 */
+/* 101 */
 /***/ function(module, exports) {
 
 	function webpackContext(req) {
@@ -8451,7 +8490,7 @@
 	webpackContext.keys = function() { return []; };
 	webpackContext.resolve = webpackContext;
 	module.exports = webpackContext;
-	webpackContext.id = 100;
+	webpackContext.id = 101;
 
 
 /***/ }

@@ -13,7 +13,7 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
 	game.entities.set(player, "position", start_pos);
 	var start_velocity = {
 		"x": 0,
-		"y": -0.5
+		"y": -0.4
 	}
 	game.entities.set(player, "velocity", start_velocity);
 

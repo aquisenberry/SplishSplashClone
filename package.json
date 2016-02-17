@@ -13,12 +13,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/CaldwellYSR/PokeClone"
+        "url": "https://github.com/CaldwellYSR/SplishSplashClone"
     },
     "keywords": [],
     "author": "Matthew Caldwell <caldwellysr@gmail.com> (http://matthew-caldwell.com/)",
     "license": "MIT",
-    "homepage": "https://github.com/CaldwellYSR/PokeClone",
+    "homepage": "http://caldwellysr.github.io/SplishSplashClone/build",
     "devDependencies": {
         "eslint": "^1.10.1",
         "eslint-loader": "^1.1.1",
