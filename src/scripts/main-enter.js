@@ -7,7 +7,7 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
 	var player_size = game.entities.get(player, "size");
 	var start_pos = {
 		"x": game.canvas.width / 2 - player_size.width / 2,
-		"y": game.canvas.height / 2 - player_size.height / 2
+		"y": game.canvas.height - player_size.height - 35
 
 	}
 	game.entities.set(player, "position", start_pos);
@@ -22,11 +22,11 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
 	var top_size = game.entities.get(top_wall, "size");
 	var bot_wall = game.instantiatePrefab("wall");
 	game.entities.set(top_wall, "position", {"x": game.canvas.width / 2 - top_size.width / 2, "y": 10});
-	game.entities.set(bot_wall, "position", {"x": game.canvas.width / 2 - top_size.width / 2, "y": game.canvas.height - 30});
+	game.entities.set(bot_wall, "position", {"x": game.canvas.width / 2 - top_size.width / 2, "y": game.canvas.height - 20});
 
 	// First Coin
 	var coin = game.instantiatePrefab("coin");
 	var coin_size = game.entities.get(coin, "size");
-	game.entities.set(coin, "position", {"x": game.canvas.width / 2 - coin_size.width / 2, "y": 35});
+	game.entities.set(coin, "position", {"x": game.canvas.width / 2 - coin_size.width / 2, "y": 25});
 
 };

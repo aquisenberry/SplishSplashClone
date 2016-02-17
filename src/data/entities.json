@@ -22,7 +22,7 @@
 		"timers": {
 			"spawn_baddie": {
                 "running": true,
-                "time": 0,
+                "time": 1000,
                 "max": 1000,
                 "script": "./scripts/spawn_baddie"
 			}

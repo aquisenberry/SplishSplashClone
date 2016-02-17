@@ -20,7 +20,7 @@ module.exports = function(entity, game) {
         "height": size
     };
 	var baddie_pos = {
-		"x": -100,
+		"x": -size,
 		"y": y
 	};
 	var baddie_velocity = {
@@ -28,7 +28,7 @@ module.exports = function(entity, game) {
 		"y": 0
 	}
 	if(right) {
-		baddie_pos.x = game.canvas.width + 100;
+		baddie_pos.x = game.canvas.width;
 		baddie_velocity.x = -speed;
 	}
 	game.entities.set(baddie, "size", baddie_size);

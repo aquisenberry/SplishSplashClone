@@ -5,10 +5,10 @@ function place_new_coin(game, top_coin) {
 	var coin_size = game.entities.get(coin, "size");
 	var coin_pos = {
 		"x": game.canvas.width / 2 - coin_size.width / 2,
-		"y": 35
+		"y": 25
 	}
 	if(!top_coin) {
-		coin_pos.y = game.canvas.height - 55;
+		coin_pos.y = game.canvas.height - 45;
 	}
 	game.entities.set(coin, "position", coin_pos);
 
@@ -35,6 +35,7 @@ module.exports = function(ecs, game) { //eslint-disable-line no-unused-vars
 				game.switchScene("game_over");
 			}
 			if(game.entities.get(other, "coin")) {
+                game.sounds.play("pickup");
 				top_coin = game.entities.get(entity, "top_coin");
 				game.entities.set(entity, "score", ++score);
 				game.entities.destroy(other);

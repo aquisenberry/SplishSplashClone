@@ -1,1 +1,3 @@
-{}
+{
+    "pickup": "./sounds/pickup.wav"
+}
