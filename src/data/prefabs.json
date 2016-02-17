@@ -1,1 +1,45 @@
-{}
+{
+	"wall": {
+        "name": "wall",
+        "wall": true,
+        "position": {
+            "x": 0,
+            "y": 0
+        },
+        "size": {
+            "width": 125,
+            "height": 20
+        },
+        "collisions": []
+    },
+	"coin": {
+		"name": "coin",
+		"coin": true,
+		"position": {
+			"x": 0,
+			"y": 0
+		},
+		"size": {
+			"width": 20,
+			"height": 20
+		},
+		"collisions": []
+	},
+	"baddie": {
+		"name": "baddie",
+		"baddie": true,
+		"position": {
+			"x": 0,
+			"y": 0
+		},
+		"size": {
+			"width": 15,
+			"height": 15
+		},
+		"velocity": {
+			"x": 0,
+			"y": 0
+		},
+		"collisions": []
+	}
+}
