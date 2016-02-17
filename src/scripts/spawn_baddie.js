@@ -4,23 +4,34 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 module.exports = function(entity, game) {
 
 	var baddie = game.instantiatePrefab("baddie");
 	var right = getRandomInt(0,1);
 	var y = getRandomInt(100, game.canvas.height - 120);
+    var size = getRandomInt(15,30);
+    var speed = getRandom(0.075, 0.3);
+    var baddie_size = {
+        "width": size,
+        "height": size
+    };
 	var baddie_pos = {
 		"x": -100,
 		"y": y
 	};
 	var baddie_velocity = {
-		"x": 0.2,
+		"x": speed,
 		"y": 0
 	}
 	if(right) {
 		baddie_pos.x = game.canvas.width + 100;
-		baddie_velocity.x = -0.2;
+		baddie_velocity.x = -speed;
 	}
+	game.entities.set(baddie, "size", baddie_size);
 	game.entities.set(baddie, "position", baddie_pos);
 	game.entities.set(baddie, "velocity", baddie_velocity);
 

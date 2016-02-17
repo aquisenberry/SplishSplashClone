@@ -20,7 +20,7 @@ module.exports = function(ecs, game) { //eslint-disable-line no-unused-vars
 		var velocity = game.entities.get(entity, "velocity");
 		var score = game.entities.get(entity, "score");
 
-		if(game.input.buttonPressed("switch")) {
+		if(game.input.buttonPressed("switch") || game.input.mouse.consumePressed(0)) {
 			velocity.y = -velocity.y;	
 		}
 
