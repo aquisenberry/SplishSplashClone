@@ -41,6 +41,12 @@
         "scenes": [
             "main"
             ]
+    },
+    {
+        "name": "./systems/simulation/baddie_simulation",
+        "scenes": [
+            "main"
+        ]
     }
 	],
         "renderer": [
