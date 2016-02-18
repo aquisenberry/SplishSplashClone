@@ -5,10 +5,10 @@ function place_new_coin(game, top_coin) {
 	var coin_size = game.entities.get(coin, "size");
 	var coin_pos = {
 		"x": game.canvas.width / 2 - coin_size.width / 2,
-		"y": 25
+		"y": 95
 	}
 	if(!top_coin) {
-		coin_pos.y = game.canvas.height - 45;
+		coin_pos.y = game.canvas.height - 105;
 	}
 	game.entities.set(coin, "position", coin_pos);
 

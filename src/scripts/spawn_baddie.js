@@ -12,7 +12,7 @@ module.exports = function(entity, game) {
 
 	var baddie = game.instantiatePrefab("baddie");
 	var right = getRandomInt(0,1);
-	var y = getRandomInt(100, game.canvas.height - 120);
+	var y = getRandomInt(120, game.canvas.height - 120);
     var size = getRandomInt(15,30);
     var speed = getRandom(0.075, 0.3);
     var baddie_size = {
