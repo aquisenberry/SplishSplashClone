@@ -7963,10 +7963,10 @@
 		var coin_size = game.entities.get(coin, "size");
 		var coin_pos = {
 			"x": game.canvas.width / 2 - coin_size.width / 2,
-			"y": 35
+			"y": 95
 		}
 		if(!top_coin) {
-			coin_pos.y = game.canvas.height - 55;
+			coin_pos.y = game.canvas.height - 105;
 		}
 		game.entities.set(coin, "position", coin_pos);
 
@@ -7990,9 +7990,10 @@
 					velocity.y = -velocity.y;	
 				}
 				if(game.entities.get(other, "baddie")) {
-					game.switchScene("game_over");
+					game.switchScene("game_over", {"score": score});
 				}
 				if(game.entities.get(other, "coin")) {
+	                game.sounds.play("pickup");
 					top_coin = game.entities.get(entity, "top_coin");
 					game.entities.set(entity, "score", ++score);
 					game.entities.destroy(other);
@@ -8037,6 +8038,7 @@
 	"use strict";
 
 	module.exports = function(game) { // eslint-disable-line no-unused-vars
+	    console.log("Score: " + game.arguments.score);
 	};
 
 
@@ -8063,13 +8065,13 @@
 		var player_size = game.entities.get(player, "size");
 		var start_pos = {
 			"x": game.canvas.width / 2 - player_size.width / 2,
-			"y": game.canvas.height / 2 - player_size.height / 2
+			"y": game.canvas.height - player_size.height - 85
 
 		}
 		game.entities.set(player, "position", start_pos);
 		var start_velocity = {
 			"x": 0,
-			"y": -0.4
+			"y": -0.3
 		}
 		game.entities.set(player, "velocity", start_velocity);
 
@@ -8077,13 +8079,13 @@
 		var top_wall = game.instantiatePrefab("wall");
 		var top_size = game.entities.get(top_wall, "size");
 		var bot_wall = game.instantiatePrefab("wall");
-		game.entities.set(top_wall, "position", {"x": game.canvas.width / 2 - top_size.width / 2, "y": 10});
-		game.entities.set(bot_wall, "position", {"x": game.canvas.width / 2 - top_size.width / 2, "y": game.canvas.height - 30});
+		game.entities.set(top_wall, "position", {"x": game.canvas.width / 2 - top_size.width / 2, "y": 80});
+		game.entities.set(bot_wall, "position", {"x": game.canvas.width / 2 - top_size.width / 2, "y": game.canvas.height - 80});
 
 		// First Coin
 		var coin = game.instantiatePrefab("coin");
 		var coin_size = game.entities.get(coin, "size");
-		game.entities.set(coin, "position", {"x": game.canvas.width / 2 - coin_size.width / 2, "y": 35});
+		game.entities.set(coin, "position", {"x": game.canvas.width / 2 - coin_size.width / 2, "y": 95});
 
 	};
 
@@ -8116,7 +8118,7 @@
 
 		var baddie = game.instantiatePrefab("baddie");
 		var right = getRandomInt(0,1);
-		var y = getRandomInt(100, game.canvas.height - 120);
+		var y = getRandomInt(120, game.canvas.height - 120);
 	    var size = getRandomInt(15,30);
 	    var speed = getRandom(0.075, 0.3);
 	    var baddie_size = {
@@ -8124,7 +8126,7 @@
 	        "height": size
 	    };
 		var baddie_pos = {
-			"x": -100,
+			"x": -size,
 			"y": y
 		};
 		var baddie_velocity = {
@@ -8132,7 +8134,7 @@
 			"y": 0
 		}
 		if(right) {
-			baddie_pos.x = game.canvas.width + 100;
+			baddie_pos.x = game.canvas.width;
 			baddie_velocity.x = -speed;
 		}
 		game.entities.set(baddie, "size", baddie_size);
@@ -8209,7 +8211,7 @@
 				"timers": {
 					"spawn_baddie": {
 						"running": true,
-						"time": 0,
+						"time": 1000,
 						"max": 1000,
 						"script": "./scripts/spawn_baddie"
 					}
@@ -8285,7 +8287,7 @@
 			},
 			"size": {
 				"width": 125,
-				"height": 20
+				"height": 10
 			},
 			"collisions": []
 		},
@@ -8341,7 +8343,9 @@
 /* 96 */
 /***/ function(module, exports) {
 
-	module.exports = {};
+	module.exports = {
+		"pickup": "./sounds/pickup.wav"
+	};
 
 /***/ },
 /* 97 */
@@ -8482,16 +8486,30 @@
 
 /***/ },
 /* 101 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	var map = {
+		"./pickup.wav": 102
+	};
 	function webpackContext(req) {
-		throw new Error("Cannot find module '" + req + "'.");
-	}
-	webpackContext.keys = function() { return []; };
-	webpackContext.resolve = webpackContext;
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
 	webpackContext.id = 101;
 
+
+/***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "sounds/pickup.wav";
 
 /***/ }
 /******/ ]);
