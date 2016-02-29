@@ -41,7 +41,13 @@
         "scenes": [
             "main"
             ]
-    }
+    },
+	{
+		"name": "./systems/simulation/play_again",
+		"scenes": [
+			"game_over"
+		]
+	}
 	],
         "renderer": [
         {
@@ -68,18 +74,18 @@
                 "main", "game_over"
                 ]
         },
-        {
-            "name": "splat-ecs/lib/systems/draw-rectangles",
-            "scenes": [
-                "main", "game_over"
-                ]
-        },
 		{
 			"name": "./systems/renderer/render_score",
 			"scenes": [
 				"main"
 				]
 		},
+        {
+            "name": "splat-ecs/lib/systems/draw-rectangles",
+            "scenes": [
+                "main", "game_over"
+                ]
+        },
         {
             "name": "splat-ecs/lib/systems/viewport-reset",
             "scenes": [

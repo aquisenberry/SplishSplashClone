@@ -8,10 +8,6 @@
             "x": 0,
             "y": 0
         },
-        "velocity": {
-            "x": 0,
-            "y": 0
-        },
         "matchCanvasSize": true
     },
     {
@@ -37,7 +33,7 @@
         },
         "velocity": {
             "x": 0,
-            "y": 0
+            "y": -0.3
         },
 		"collisions": [],
 		"score": 0,
@@ -53,11 +49,20 @@
             "x": 0,
             "y": 0
         },
-        "velocity": {
-            "x": 0,
-            "y": 0
-        },
         "matchCanvasSize": true
-    }	
+    },
+	{
+		"id": 1,
+		"name": "play_again",
+		"play_again": true,
+		"position": {
+			"x": 10,
+			"y": 10
+		},
+		"size": {
+			"width": 0,
+			"height": 0
+		}
+	}
 	]
 }

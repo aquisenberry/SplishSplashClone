@@ -1,3 +1,4 @@
 {
-    "pickup": "./sounds/pickup.wav"
+    "pickup": "./sounds/pickup.wav",
+	"hit": "./sounds/hit.wav"
 }

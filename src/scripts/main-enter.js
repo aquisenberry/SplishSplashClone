@@ -11,11 +11,6 @@ module.exports = function(game) { // eslint-disable-line no-unused-vars
 
 	}
 	game.entities.set(player, "position", start_pos);
-	var start_velocity = {
-		"x": 0,
-		"y": -0.3
-	}
-	game.entities.set(player, "velocity", start_velocity);
 
 	// Place Walls
 	var top_wall = game.instantiatePrefab("wall");

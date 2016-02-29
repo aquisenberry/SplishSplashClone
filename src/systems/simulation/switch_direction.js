@@ -32,6 +32,7 @@ module.exports = function(ecs, game) { //eslint-disable-line no-unused-vars
 				velocity.y = -velocity.y;	
 			}
 			if(game.entities.get(other, "baddie")) {
+				game.sounds.play("hit");
 				game.switchScene("game_over", {"score": score});
 			}
 			if(game.entities.get(other, "coin")) {
