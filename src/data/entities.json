@@ -55,6 +55,7 @@
 		"id": 1,
 		"name": "play_again",
 		"play_again": true,
+		"strokeStyle": "red",
 		"position": {
 			"x": 10,
 			"y": 10
